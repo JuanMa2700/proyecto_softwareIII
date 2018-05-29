@@ -14,6 +14,32 @@
 */
 
 const Route = use('Route')
+const Database = use('Database')
 
 Route.on('/').render('welcome')
-Route.on('/nuevaTarea').render('nuevaTarea')
+Route.post('/tarea','TareaController.store')
+Route.get('tarea', async ({ request, view }) => {
+    const Curso = use('App/Models/Curso')
+    const Materia = use('App/Models/Materia')
+    const Tema = use('App/Models/Tema')
+    let cursos = await Database
+      .table('cursos')
+      .where('id_profesor', '1')
+
+    for (var i = 0; i < cursos.length; i++) {
+      let nombre= await Database.select('nombre').from('materias').where('id', cursos[i].id_materia);
+      cursos[i].nombreMateria= nombre[0].nombre
+    }
+    let temas = await Database
+      .table('temas')
+      //.innerJoin('materias', 'cursos.id_materia', ',materias.id')
+
+    console.log(cursos)
+    if (request.format() === 'json') {
+      return users
+    } else {
+      return view.render('nuevatarea', { cursos,temas })
+    }
+
+  })
+  .formats(['json'])

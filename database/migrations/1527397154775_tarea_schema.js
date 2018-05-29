@@ -6,16 +6,16 @@ class TareaSchema extends Schema {
   up () {
     this.create('tareas', (table) => {
 
-        table.integer('id')
-        table.unique('id')
+        table.increments()
+        table.timestamps()
       	table.string('nombre', 80)
       	table.integer('id_curso')
-      	table.time('fecha_limite', 'dd/mm/aaaa')
+      	table.string('fecha_limite')
       	table.integer('id_tema')
       	table.text('logros')
       	table.string('archivo', 30)
       	table.text('descripcion')
-      	
+
     })
   }
 
