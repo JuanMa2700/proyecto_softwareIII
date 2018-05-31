@@ -24,17 +24,17 @@ Route.get('tarea', async ({ request, view }) => {
     const Tema = use('App/Models/Tema')
     let cursos = await Database
       .table('cursos')
-      .where('id_profesor', '1')
+      .where('codigo_profesor', '12345')
 
     for (var i = 0; i < cursos.length; i++) {
-      let nombre= await Database.select('nombre').from('materias').where('id', cursos[i].id_materia);
+      let nombre= await Database.select('nombre').from('materias').where('codigo', cursos[i].codigo_materia);
       cursos[i].nombreMateria= nombre[0].nombre
     }
     let temas = await Database
       .table('temas')
       //.innerJoin('materias', 'cursos.id_materia', ',materias.id')
 
-    console.log(cursos)
+    //console.log(cursos)
     if (request.format() === 'json') {
       return users
     } else {

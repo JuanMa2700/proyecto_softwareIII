@@ -6,6 +6,8 @@ class ProfesorSchema extends Schema {
   up () {
     this.create('profesors', (table) => {
 
+      table.increments()
+      table.timestamps()
     	table.integer('cedula')
     	table.unique('cedula')
     	table.string('nombre', 30)

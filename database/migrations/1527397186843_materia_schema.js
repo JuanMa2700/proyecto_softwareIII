@@ -6,8 +6,10 @@ class MateriaSchema extends Schema {
   up () {
     this.create('materias', (table) => {
 
-    	table.integer('id')
-    	table.unique('id')
+      table.increments()
+      table.timestamps()
+    	table.integer('codigo')
+    	table.unique('codigo')
     	table.string('nombre', 30)
       
     })

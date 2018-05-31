@@ -5,26 +5,26 @@ const { validate } = use('Validator')
 class TareaController {
   async store({request, response, session}){
 
+    console.log(request.body);
+
     //Validaciones
     //
     const messages = {
      required: 'Este campo es requerido',
-     min: 'Este campo es de minimo 3 caracteres',
-     max: 'Se ha excedido el máximo de caracteres posibles',
+     min: 'Este campo es de minimo 3 caractéres',
+     max: 'Se ha excedido el máximo de caractéres posibles',
      string: 'Caractéres inválidos',
-     alphaNumeric: 'Caractéres inválidos',
-     alpha: 'Caractéres inválidos'
     }
 
     
     const validation = await validate (request.all(),{
 
-      nombre: 'required|min:3|max:50|string',
-      //grupo: 'required|min:3|max:50',
-      //fecha_limite: 'required|min:3|max:50',
-      //tema: 'required|min:3|max:50',
+      nombre: 'required|min:3|max:50',
+      grupo: 'required',
+      fecha: 'required',
+      tema: 'required',
       logros: 'required|min:3|max:50|string',
-      descripcion: 'required|min:3|max:50|string|alpha'
+      descripcion: 'required|min:3|max:50|string'
 
     }, messages)
 
@@ -37,31 +37,36 @@ class TareaController {
     const Tarea = use('App/Models/Tarea')
     const tarea = new Tarea()
     tarea.nombre=request.body.nombre
-    tarea.id_curso=request.body.grupo
+    tarea.codigo_curso=request.body.grupo
     tarea.fecha_limite=request.body.fecha
-    tarea.id_tema=request.body.tema
+    tarea.codigo_tema=request.body.tema
     tarea.logros=request.body.logros
     tarea.descripcion=request.body.descripcion
-    //tarea.name=request.body.tipo
+    tarea.estado=request.body.tipo
     
-    if (request.archivo!=null) {
-      const archivo = request.file('archivo', {
-         types: ['image'],
-         size: '2mb'
-       })
-      let fileName= `${new Date().getTime()}.${archivo.subtype}`
-      tarea.archivo=fileName
+    const archivo = request.file('archivo', {
+       types: ['image'],
+       size: '2mb'
+     })
+    let fileName= `${new Date().getTime()}.${archivo.subtype}`
+    tarea.archivo=fileName
 
-       await archivo.move(Helpers.tmpPath('uploads'), {
-         name: fileName
-       })
+     await archivo.move(Helpers.tmpPath('uploads'), {
+       name: fileName
+     })
+    
+    
+    await tarea.save()
+
+    if(request.body.tipo == 'publicada'){
+      session.flash({ notification: '¡Tarea agregada!'})
+    }else if(request.body.tipo == 'borrador'){
+      session.flash({ notification: '¡Borrador guardado!'})
     }
+
     
-     await tarea.save()
 
-     session.flash({ notification: '¡Tarea agregada!'})
-
-     return response.redirect('back')
+    return response.redirect('back')
 
   }
 }

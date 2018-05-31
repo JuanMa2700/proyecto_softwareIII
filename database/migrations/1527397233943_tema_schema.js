@@ -6,9 +6,11 @@ class TemaSchema extends Schema {
   up () {
     this.create('temas', (table) => {
 
-    	table.integer('id')
-    	table.unique('id')
-    	table.integer('id_materia')
+      table.increments()
+      table.timestamps()
+    	table.integer('codigo')
+    	table.unique('codigo')
+    	table.integer('codigo_materia')
     	table.text('descripcion')
 
     })
