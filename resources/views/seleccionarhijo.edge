@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hijos</title>
+	{{ css('css/bootstrap') }}
+	{{ script('js/bootstrap') }}
+	{{ script('js/jquery') }}
+	{{ script('js/index') }}
+</head>
+<body>
+
+	<div class = "row">
+	<div class = "col-md-3"></div>
+	<div class = "col-md-6">
+
+		<br>
+		<h1>SELECCIONAR ESTUDIANTE</h1>
+		<br>
+		<ul class="list-group">
+		@each(hijo in hijos)
+			<li class="list-group-item"><a href="/consultar/tareas/{{hijo.documento}}">{{hijo.apellido }}  {{ hijo.nombre}} - {{ hijo.documento }}</a></li>
+		@endeach
+		</ul>
+
+	</div>
+	<div class = "col-md-3"></div>
+	
+</body>
+</html>

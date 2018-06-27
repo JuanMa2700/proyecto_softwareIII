@@ -17,7 +17,7 @@ class CursoSchema extends Schema {
   }
 
   down () {
-    this.drop('cursos')
+    this.dropIfExists('cursos')
   }
 }
 

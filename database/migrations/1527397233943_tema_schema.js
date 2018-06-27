@@ -17,7 +17,7 @@ class TemaSchema extends Schema {
   }
 
   down () {
-    this.drop('temas')
+    this.dropIfExists('temas')
   }
 }
 

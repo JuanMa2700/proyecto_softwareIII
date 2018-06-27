@@ -18,7 +18,7 @@ class ProfesorSchema extends Schema {
   }
 
   down () {
-    this.drop('profesors')
+    this.dropIfExists('profesors')
   }
 }
 

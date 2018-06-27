@@ -34,7 +34,6 @@ Route.get('tarea', async ({ request, view }) => {
       .table('temas')
       //.innerJoin('materias', 'cursos.id_materia', ',materias.id')
 
-    //console.log(cursos)
     if (request.format() === 'json') {
       return users
     } else {
@@ -43,3 +42,59 @@ Route.get('tarea', async ({ request, view }) => {
 
   })
   .formats(['json'])
+
+Route.get('consultar/tareas/:documento', async({view, params}) => {
+
+    const Estudiante = use('App/Models/Estudiante')
+    const Curso = use('App/Models/Curso')
+    const Tarea = use('App/Models/Tarea')
+
+    const estudiante = await Estudiante.findBy('documento', params.documento)
+
+    let cursos = await Database
+      .table('cursos')
+      .where('codigo_grupo', estudiante.codigo_grupo)
+
+    var tareasGenerales = new Array();
+
+    for (var i = 0; i < cursos.length; i++) {
+
+        let materia = await Database
+          .table('materias')
+          .where('codigo', cursos[i].codigo_materia)
+
+        let tareasCurso = await Database
+          .table('tareas')
+          .where('codigo_curso', cursos[i].codigo)
+
+          for (var j = 0; j < tareasCurso.length; j++) {
+            tareasCurso[j].materia = materia[0].nombre;
+            tareasCurso[j].fecha_limite = new Date (tareasCurso[j].fecha_limite).toLocaleDateString();
+            tareasGenerales.push(tareasCurso[j]);
+          }
+    }
+
+    tareasGenerales.sort(function(a,b){
+      return  new Date(a.fecha_limite)-new Date(b.fecha_limite);
+    });
+
+    return view.render('consultartareasestudiante', { tareasGenerales })
+
+})
+
+Route.get('consultar/seleccionarHijo/:cedula', async({view, params}) => {
+
+    const Padre = use('App/Models/Padre')
+    const Curso = use('App/Models/Curso')
+    const Tarea = use('App/Models/Tarea')
+
+    const padre = await Padre.findBy('cedula', params.cedula)
+
+    let hijos = await Database
+      .table('estudiantes')
+      .where('cedula_padre', padre.cedula)
+
+    return view.render('seleccionarHijo', { hijos })
+
+})
+

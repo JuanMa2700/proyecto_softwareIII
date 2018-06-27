@@ -16,7 +16,7 @@ class MateriaSchema extends Schema {
   }
 
   down () {
-    this.drop('materias')
+    this.dropIfExists('materias')
   }
 }
 

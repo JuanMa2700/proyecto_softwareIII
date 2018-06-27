@@ -15,7 +15,7 @@ class GrupoSchema extends Schema {
   }
 
   down () {
-    this.drop('grupos')
+    this.dropIfExists('grupos')
   }
 }
 

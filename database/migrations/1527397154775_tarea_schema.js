@@ -21,7 +21,7 @@ class TareaSchema extends Schema {
   }
 
   down () {
-    this.drop('tareas')
+    this.dropIfExists('tareas')
   }
 }
 
