@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>COLEGIO ESPERANZA</title>
+	{{ css('css/bootstrap') }}
+	{{ script('js/bootstrap') }}
+	{{ script('js/jquery') }}
+	{{ script('js/index') }}
+</head>
+<body>
+
+	@include('prueba_navbar')
+
+	<div class = "row">
+		<div class = "col-md-2"></div>
+		<div class = "col-md-8">
+			@!section('content')
+		</div>
+	</div>
+	
+</body>
+</html>

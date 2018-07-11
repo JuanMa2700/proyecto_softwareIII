@@ -1,41 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>tareas</title>
-	{{ css('css/bootstrap') }}
-	{{ script('js/bootstrap') }}
-	{{ script('js/jquery') }}
-	{{ script('js/index') }}
-</head>
-<body>
+@layout('prueba_layout')
 
-	<div class = "row">
-	<div class = "col-md-2"></div>
-	<div class = "col-md-8">
-		<table class="table table-hover">
-		  <thead>
-		    <tr>
-		      <th scope="col">Nombre</th>
-		      <th scope="col">Materia</th>
-		      <th scope="col">Fecha de entrega</th>
-		      <th scope="col">Descripción</th>
-		    </tr>
-		  </thead>
-		  <tbody>
+@section('content')
+	<table class="table table-hover">
+	  <thead>
+	    <tr>
+	      <th scope="col">Nombre</th>
+	      <th scope="col">Materia</th>
+	      <th scope="col">Fecha de entrega</th>
+	      <th scope="col">Descripción</th>
+	    </tr>
+	  </thead>
+	  <tbody>
 
-		  	@each(tarea in tareasGenerales)
-				<tr>
-			      <th scope="row">{{tarea.nombre}}</th>
-			      <td>{{tarea.materia}}</td>
-			      <td>{{tarea.fecha_limite}}</td>
-			      <td>{{tarea.descripcion}}</td>
-		    	</tr>
-			@endeach
-		    
-		  </tbody>
-		</table>
-	</div>
-	<div class = "col-md-2"></div>
-</body>
-</html>
+	  	@each(tarea in tareasGenerales)
+			<tr>
+		      <th scope="row">{{tarea.nombre}}</th>
+		      <td>{{tarea.materia}}</td>
+		      <td>{{tarea.fecha_limite}}</td>
+		      <td>{{tarea.descripcion}}</td>
+	    	</tr>
+		@endeach
+	    
+	  </tbody>
+	</table>
+@endsection

@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Hijos</title>
-	{{ css('css/bootstrap') }}
-	{{ script('js/bootstrap') }}
-	{{ script('js/jquery') }}
-	{{ script('js/index') }}
-</head>
-<body>
+@layout('prueba_layout')
 
-	<div class = "row">
-	<div class = "col-md-3"></div>
-	<div class = "col-md-6">
+@section('content')
+
 
 		<br>
 		<h1>SELECCIONAR ESTUDIANTE</h1>
@@ -23,8 +12,6 @@
 		@endeach
 		</ul>
 
-	</div>
-	<div class = "col-md-3"></div>
 	
-</body>
-</html>
+	
+@endsection

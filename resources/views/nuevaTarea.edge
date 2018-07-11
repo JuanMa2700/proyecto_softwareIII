@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Nueva Tarea</title>
-	{{ css('css/bootstrap') }}
-	{{ script('js/bootstrap') }}
-	{{ script('js/jquery') }}
-	{{ script('js/index') }}
-</head>
-<body>
+@layout('prueba_layout')
 
-	<div class = "row">
-		<div class = "col-md-4"></div>
-		<div class = "col-md-4">
+@section('content')
 
 			<h1 class="display-4">
 					NUEVA TAREA
@@ -38,10 +26,10 @@
 				</div>
 				<div class="form-group row">
 					<div class="col-md-2"><label for="grupo">Grupo</label></div>
-					<div class="col-md-10"><select class="form-control" name="grupo" id="grupo" value="{{ old('grupo','') }}">
+					<div class="col-md-10"><select class="form-control" name="grupo" id="grupo" selected="{{ old('grupo','') }}">
 						@each(curso in cursos)
 							<option value={{curso.codigo}}>
-								{{curso.codigo_grupo}}-{{curso.nombreMateria}}
+								{{curso.nombre}}
 							</option>
 						@endeach
 					</select>
@@ -78,7 +66,7 @@
 				</div>
 				<div class="form-group row">
 					<div class="col-md-12">
-						<textarea class="form-control" name="descripcion" rows="6" placeholder="DESCRIPCIÓN DE LA TAREA" value="{{ old('descripcion','') }}">
+						<textarea class="form-control" name="descripcion" rows="6" placeholder="{{ old('descripcion','') }}" value="{{ old('descripcion','') }}">
 						</textarea>
 						{{elIf('<span class="text-danger">$self</span>', getErrorFor('descripcion'), hasErrorFor('descripcion'))}}
 					</div>
@@ -97,8 +85,6 @@
 			</form>
 
 		</div>
-		<div class = "col-md-4"></div>
-	</div>
+		
 
-</body>
-</html>
+@endsection

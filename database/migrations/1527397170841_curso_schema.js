@@ -12,6 +12,7 @@ class CursoSchema extends Schema {
       	table.integer('codigo_grupo')
       	table.integer('codigo_materia')
     	table.integer('codigo_profesor')
+      table.string('nombre')
     	
     })
   }
