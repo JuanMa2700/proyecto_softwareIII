@@ -23,6 +23,7 @@ class ConstraintsSchema extends Schema {
         table.foreign('codigo_grupo').references('grupos.codigo').onDelete('cascade')
         table.foreign('cedula_padre').references('padres.cedula').onDelete('cascade')
     })
+
   }
 
   down () {
