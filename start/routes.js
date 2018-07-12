@@ -18,14 +18,23 @@ const Database = use('Database')
 
 Route.on('/').render('welcome')
 Route.on('/inicio_sesion').render('inicio_sesion')
-Route.on('/registro').render('registrarse')
 Route.on('/registrarPadre').render('registrarPadre')
-Route.on('/registrarEstudiante').render('registrarEstudiante')
 Route.on('/registrarProfesor').render('registrarProfesor')
 Route.post('/tarea','TareaController.store')
 Route.post('/estudiante','EstudianteController.store')
 Route.post('/profesor','ProfesorController.store')
 Route.post('/padre','PadreController.store')
+
+Route.get('/registrarEstudiante', async ({ request, view }) => {
+
+  const Padre = use('App/Models/Padre')
+  let padres = await Database
+    .table('padres')
+    
+  return view.render('registrarEstudiante', {padres})
+
+})
+
 Route.get('tarea', async ({ request, view }) => {
     const Curso = use('App/Models/Curso')
     const Materia = use('App/Models/Materia')
