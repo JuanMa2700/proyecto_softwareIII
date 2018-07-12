@@ -10,10 +10,10 @@ class EstudianteSchema extends Schema {
       table.integer('documento')
       table.unique('documento')
       table.string('nombre', 30)
-	     table.string('apellido', 30)
+	    table.string('apellido', 30)
 	    table.integer('edad')
-	     table.integer('codigo_grupo')
-       table.integer('cedula_padre')
+	    table.integer('codigo_grupo')
+      table.integer('cedula_padre')
 
     })
   }
