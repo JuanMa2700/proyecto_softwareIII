@@ -18,6 +18,10 @@ const Database = use('Database')
 
 Route.on('/').render('welcome')
 Route.on('/inicio_sesion').render('inicio_sesion')
+Route.on('/registro').render('registrarse')
+Route.on('/registrarPadre').render('registrarPadre')
+Route.on('/registrarEstudiante').render('registrarEstudiante')
+Route.on('/registrarProfesor').render('registrarProfesor')
 Route.post('/tarea','TareaController.store')
 Route.get('tarea', async ({ request, view }) => {
     const Curso = use('App/Models/Curso')
