@@ -29,17 +29,15 @@
 				    <label for="edad">Edad</label>
 				    <input type="text" class="form-control" id="edad" placeholder="Su edad">
 				  </div>
-				  <div class="form-group row">
-					<label for="edad">Acudiente</label>
-					<div class="col-md-10"><select class="form-control" name="tema">
-						@each(padre in Padres)
-							<option value="{{padre.nombre}} - {{padre.apellido}}">
-								{{tema.descripcion}}
+				  <div class="form-group">
+					<label for="acudiente">Acudiente</label>
+						<select class="form-control" name="tema">
+						@each(padre in padres)
+							<option value="{{padre.cedula}}">
+								{{padre.nombre}} {{padre.apellido}}
 							</option>
 						@endeach
 					</select>
-					{{elIf('<span class="text-danger">$self</span>', getErrorFor('tema'), hasErrorFor('tema'))}}
-					</div>
 				</div>
 				  <button type="submit" class="btn btn-primary">Registrarse</button>
 				</form>
