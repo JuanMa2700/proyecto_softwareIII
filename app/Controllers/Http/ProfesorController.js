@@ -1,20 +1,24 @@
 'use strict'
 
 class ProfesorController {
-    async create({request, response}){
+    async store({request, response}){
+        console.log(request.body)
         const User = use('App/Models/User');
         const user = new User()
         user.codigo=request.body.documento
-        user.tipo=1
-        user.password=request.body.constrasena
-        const Estudiante = use('App/Models/Profesor');
-        const estudiante = new Estudiante()
-        estudiante.nombre= request.body.nombre
-        estudiante.apellido = request.body.apellido
-        estudiante.edad = request.body.edad
-        estudiante.cedula = request.body.documento
+        user.rol=1
+        user.password=request.body.contrasena
+        user.username=request.body.nombre+request.body.documento
+        const Profesor = use('App/Models/Profesor');
+        const profesor = new Profesor()
+        profesor.nombre= request.body.nombre
+        profesor.apellido = request.body.apellido
+        profesor.edad = request.body.edad
+        profesor.cedula= request.body.documento
+        console.log(profesor)
+        console.log(user)
         await user.save()
-        await estudiante.save()
+        await profesor.save()
     }
 }
 

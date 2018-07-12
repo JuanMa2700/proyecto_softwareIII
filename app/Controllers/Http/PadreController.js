@@ -1,19 +1,24 @@
 'use strict'
 
 class PadreController {
-    async create({request, response}){
+    async store({request, response}){
+        console.log(request.body)
         const User = use('App/Models/User');
         const user = new User()
         user.codigo=request.body.documento
-        user.tipo=1
-        user.password=request.body.constrasena
-        const Estudiante = use('App/Models/Padre');
-        const estudiante = new Estudiante()
-        estudiante.nombre= request.body.nombre
-        estudiante.apellido = request.body.apellido
-        estudiante.edad = request.body.edad
+        user.rol=1
+        user.password=request.body.contrasena
+        user.username=request.body.nombre+request.body.documento
+        const Padre = use('App/Models/Padre');
+        const padre = new Padre()
+        padre.nombre= request.body.nombre
+        padre.apellido = request.body.apellido
+        padre.edad = request.body.edad
+        padre.cedula= request.body.documento
+        console.log(padre)
+        console.log(user)
         await user.save()
-        await estudiante.save()
+        await padre.save()
     }
 }
 
