@@ -25,6 +25,12 @@ Route.post('/estudiante','EstudianteController.store')
 Route.post('/profesor','ProfesorController.store')
 Route.post('/padre','PadreController.store')
 Route.post('/login','UserController.login')
+Route.get('/logout',async ({auth})=>{
+  await auth.logout()
+})
+Route.get('/ses',({session})=>{
+  console.log(session.all())
+})
 
 Route.get('/registrarEstudiante', async ({ request, view }) => {
 
