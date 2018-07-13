@@ -19,6 +19,7 @@ class ProfesorController {
         console.log(user)
         await user.save()
         await profesor.save()
+        response.redirect('inicio_sesion')
     }
 }
 

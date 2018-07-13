@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-3">
 	<div class="container">
-		<a href="#" class="navbar-brand">COLEGIO ESPERANZA</a>
+		@loggedIn
+			<a href="/principal_sesion" class="navbar-brand">COLEGIO ESPERANZA</a>
+		@else
+			<a href="#" class="navbar-brand">COLEGIO ESPERANZA</a>
+		@endloggedIn
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -13,14 +17,9 @@
 					<a href="/tarea" class="nav-link">Agregar Tarea</a>
 				</li>
 				@endif
-				@if(auth.user.rol==2)
-				<li class="nav-item">
-					<a href="/tarea" class="nav-link">Agregar Tarea</a>
-				</li>
-				@endif
 				@if(auth.user.rol==1)
 				<li class="nav-item">
-					<a href="/consultar/seleccionarHijo/{{ auth.user.codigo }}" class="nav-link">Hijos</a>
+					<a href="/consultar/seleccionarHijo/{{ auth.user.codigo }}" class="nav-link">Consultar Hijos</a>
 				</li>
 				@endif
 				@if(auth.user.rol==3)

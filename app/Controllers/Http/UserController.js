@@ -1,7 +1,7 @@
 class UserController {
   
 
-    async login ({ request, auth,session,response }) {
+    async login ({request, auth,session, response}) {
       const { codigo, password } = request.all()
       await auth.attempt(codigo, password)
       const User = use('App/Models/User')
@@ -25,7 +25,7 @@ class UserController {
         session.put('nombre', user.nombre)
         auth.user.username = user.nombre;
       }
-      response.redirect("/")
+      response.redirect("/principal_sesion")
     }
   }
 

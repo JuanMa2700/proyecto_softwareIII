@@ -20,13 +20,15 @@ Route.on('/').render('welcome')
 Route.on('/login').render('inicio_sesion')
 Route.on('/registrarPadre').render('registrarPadre')
 Route.on('/registrarProfesor').render('registrarProfesor')
+Route.on('/principal_sesion').render('principal_sesion')
 Route.post('/tarea','TareaController.store')
 Route.post('/estudiante','EstudianteController.store')
 Route.post('/profesor','ProfesorController.store')
 Route.post('/padre','PadreController.store')
 Route.post('/login','UserController.login')
-Route.get('/logout',async ({auth})=>{
+Route.get('/logout',async ({response, auth})=>{
   await auth.logout()
+  response.redirect('login')
 })
 Route.get('/ses',({session,auth})=>{
   console.log(session.all())
