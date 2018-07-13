@@ -17,13 +17,14 @@ const Route = use('Route')
 const Database = use('Database')
 
 Route.on('/').render('welcome')
-Route.on('/inicio_sesion').render('inicio_sesion')
+Route.on('/login').render('inicio_sesion')
 Route.on('/registrarPadre').render('registrarPadre')
 Route.on('/registrarProfesor').render('registrarProfesor')
 Route.post('/tarea','TareaController.store')
 Route.post('/estudiante','EstudianteController.store')
 Route.post('/profesor','ProfesorController.store')
 Route.post('/padre','PadreController.store')
+Route.post('/login','UserController.login')
 
 Route.get('/registrarEstudiante', async ({ request, view }) => {
 
