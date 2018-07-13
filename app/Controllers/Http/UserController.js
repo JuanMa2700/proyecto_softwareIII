@@ -1,11 +1,12 @@
 class UserController {
-
-   
+  
 
     async login ({ request, auth }) {
-      const { email, password } = request.all()
-      await auth.attempt(email, password)
+      const { codigo, password } = request.all()
+      await auth.attempt(codigo, password)
   
       return 'Logged in successfully'
     }
   }
+
+  module.exports = UserController
