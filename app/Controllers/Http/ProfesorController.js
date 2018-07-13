@@ -6,7 +6,7 @@ class ProfesorController {
         const User = use('App/Models/User');
         const user = new User()
         user.codigo=request.body.documento
-        user.rol=1
+        user.rol=2
         user.password=request.body.contrasena
         user.username=request.body.nombre+request.body.documento
         const Profesor = use('App/Models/Profesor');

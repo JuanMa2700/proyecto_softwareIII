@@ -6,7 +6,7 @@ class EstudianteController {
         const User = use('App/Models/User');
         const user = new User()
         user.codigo=request.body.documento
-        user.rol=1
+        user.rol=3
         user.password=request.body.contrasena
         user.username=request.body.nombre+request.body.documento
         const Estudiante = use('App/Models/Estudiante');
