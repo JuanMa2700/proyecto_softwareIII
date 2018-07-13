@@ -9,7 +9,7 @@ class TareaController {
 
     //Validaciones
     //
-    const messages = {
+    /*const messages = {
      required: 'Este campo es requerido',
      min: 'Este campo es de minimo 3 caractéres',
      max: 'Se ha excedido el máximo de caractéres posibles',
@@ -31,7 +31,7 @@ class TareaController {
     if(validation.fails()){
       session.withErrors(validation.messages()).flashAll()
       return response.redirect('back')
-    }
+    }*/
 
     const Helpers = use('Helpers')
     const Tarea = use('App/Models/Tarea')
