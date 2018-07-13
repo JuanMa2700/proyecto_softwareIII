@@ -1,18 +1,41 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-3">
 	<div class="container">
-		<a href="/inicio_sesion" class="navbar-brand">COLEGIO ESPERANZA</a>
+		<a href="/login" class="navbar-brand">COLEGIO ESPERANZA</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
+		
 			<ul class="navbar-nav ml-auto">
+			@loggedIn
+				@if(auth.user.rol==2)
 				<li class="nav-item">
-					<a href="/tarea" class="nav-link">Tareas</a>
+					<a href="/tarea" class="nav-link">Agregar Tarea</a>
 				</li>
+				@endif
+				@if(auth.user.rol==2)
 				<li class="nav-item">
-					<a href="/consultar/seleccionarHijo/70031" class="nav-link">Hijos</a>
+					<a href="/tarea" class="nav-link">Agregar Tarea</a>
 				</li>
+				@endif
+				@if(auth.user.rol==1)
 				<li class="nav-item">
+					<a href="/consultar/seleccionarHijo/{{ auth.user.codigo }}" class="nav-link">Hijos</a>
+				</li>
+				@endif
+				@if(auth.user.rol==3)
+				<li class="nav-item">
+					<a href="/consultar/tareas/{{ auth.user.codigo }}" class="nav-link">Consultar Tarea</a>
+				</li>
+				@endif
+				<li class="nav-item">
+					<a href="/logout" class="nav-link">Logout</a>
+				</li>
+				@else
+				<li class="nav-item">
+					<a href="/login" class="nav-link">Login</a>
+				</li>
+				<li class="nav-item">				
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_registrar">Registrar</button>
 					<div class="modal fade" id="modal_registrar" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-sm">
@@ -25,6 +48,7 @@
 					</div>
 				</li>
 			</ul>
+			@endloggedIn
 		</div>
 	</div>
 </nav>

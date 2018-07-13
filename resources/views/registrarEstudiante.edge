@@ -8,7 +8,8 @@
 		<div class="col-md-6">
 			<div class="jumbotron cajalogin">
 				<h2>REGISTRARSE</h2>
-				<form>
+				<form method="post" action="estudiante" enctype="multipart/form-data">
+				{{ csrfField() }}
 				  <div class="form-group">
 				    <label for="nombre">Nombre</label>
 				    <input type="text" class="form-control" name="nombre" placeholder="Su nombre">

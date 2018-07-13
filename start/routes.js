@@ -28,8 +28,9 @@ Route.post('/login','UserController.login')
 Route.get('/logout',async ({auth})=>{
   await auth.logout()
 })
-Route.get('/ses',({session})=>{
+Route.get('/ses',({session,auth})=>{
   console.log(session.all())
+  console.log(auth.user)
 })
 
 Route.get('/registrarEstudiante', async ({ request, view }) => {
