@@ -1,37 +1,9 @@
 'use strict'
 
-const { validate } = use('Validator') 
+const Database = use('Database')
 
 class TareaController {
   async store({request, response, session}){
-
-    console.log(request.body);
-
-    //Validaciones
-    //
-    const messages = {
-     required: 'Este campo es requerido',
-     min: 'Este campo es de minimo 3 caractéres',
-     max: 'Se ha excedido el máximo de caractéres posibles',
-     string: 'Caractéres inválidos',
-    }
-
-    
-    const validation = await validate (request.all(),{
-
-      nombre: 'required|min:3|max:50',
-      grupo: 'required',
-      fecha: 'required',
-      tema: 'required',
-      logros: 'required|min:3|max:50|string',
-      descripcion: 'required|min:3|max:50|string'
-
-    }, messages)
-
-    if(validation.fails()){
-      session.withErrors(validation.messages()).flashAll()
-      return response.redirect('back')
-    }
 
     const Helpers = use('Helpers')
     const Tarea = use('App/Models/Tarea')
@@ -43,6 +15,19 @@ class TareaController {
     tarea.logros=request.body.logros
     tarea.descripcion=request.body.descripcion
     tarea.estado=request.body.tipo
+
+
+    let tarea_existente = await Database
+          .table('tareas')
+          .where({codigo_curso: tarea.codigo_curso,
+                  nombre: tarea.nombre,
+                  fecha_limite: tarea.fecha_limite
+                })
+
+    if(tarea_existente.length > 0){
+      session.flash({ notification: 'Esta tarea ya existe'})
+      return response.redirect('back')
+    }
     
     const archivo = request.file('archivo', {
        types: ['image'],
@@ -60,7 +45,7 @@ class TareaController {
 
     if(request.body.tipo == 'publicada'){
       session.flash({ notification: '¡Tarea agregada!'})
-    }else if(request.body.tipo == 'borrador'){
+    }else if(request.body.tipo == 'no publicada'){
       session.flash({ notification: '¡Borrador guardado!'})
     }
 

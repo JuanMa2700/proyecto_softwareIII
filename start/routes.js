@@ -85,7 +85,9 @@ Route.get('consultar/tareas/:documento', async({view, params}) => {
 
         let tareasCurso = await Database
           .table('tareas')
-          .where('codigo_curso', cursos[i].codigo)
+          .where({codigo_curso: cursos[i].codigo,
+                  estado: 'publicada'
+                })
 
           for (var j = 0; j < tareasCurso.length; j++) {
             tareasCurso[j].materia = materia[0].nombre;
