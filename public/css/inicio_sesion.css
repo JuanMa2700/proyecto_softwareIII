@@ -3,18 +3,6 @@ html{
 	padding: 0px;
 }
 
-.cajalogin{
-
-	width: 400px;
-	margin: 40px auto;
-	border-radius: 3px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 50px;
-	padding-right: 50px;
-
-}
-
 body{
 	background-image: url("../ninos.jpg");
 }

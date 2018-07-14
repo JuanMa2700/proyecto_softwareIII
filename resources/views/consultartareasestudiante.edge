@@ -3,10 +3,10 @@
 @section('content')
 	@loggedIn
 		@if(auth.user.rol==1)
-			<h1 class="text-centered">TAREAS PENDIENTES</h1>
+			<h1>TAREAS PENDIENTES</h1>
 		@endif
 		@if(auth.user.rol==3)
-			<H1 class="text-centered">MIS TAREAS PENDIENTES</H1>
+			<H1 class=>MIS TAREAS PENDIENTES</H1>
 		@endif
 	@endloggedIn
 	
