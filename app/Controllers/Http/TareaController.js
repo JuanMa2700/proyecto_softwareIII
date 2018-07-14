@@ -33,6 +33,7 @@ class TareaController {
        types: ['image'],
        size: '2mb'
      })
+     
     let fileName= `${new Date().getTime()}.${archivo.subtype}`
     tarea.archivo=fileName
 

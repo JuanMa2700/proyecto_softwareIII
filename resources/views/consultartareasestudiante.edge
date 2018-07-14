@@ -1,26 +1,53 @@
 @layout('prueba_layout')
 
 @section('content')
-	<table class="table table-hover">
-	  <thead>
-	    <tr>
-	      <th scope="col">Nombre</th>
-	      <th scope="col">Materia</th>
-	      <th scope="col">Fecha de entrega</th>
-	      <th scope="col">Descripción</th>
-	    </tr>
-	  </thead>
-	  <tbody>
+	@loggedIn
+		@if(auth.user.rol==1)
+			<h1 class="text-centered">TAREAS PENDIENTES</h1>
+		@endif
+		@if(auth.user.rol==3)
+			<H1 class="text-centered">MIS TAREAS PENDIENTES</H1>
+		@endif
+	@endloggedIn
+	
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Nombre</th>
+					<th scope="col">Materia</th>
+					<th scope="col">Fecha de entrega</th>
+					<th scope="col">Descripción</th>
+					@loggedIn
+						@if(auth.user.rol==3)
+							<th scope="col">Detalles</th>
+						@endif
+					@endloggedIn
+				</tr>
+			</thead>
+			<tbody>
 
-	  	@each(tarea in tareasGenerales)
-			<tr>
-		      <th scope="row">{{tarea.nombre}}</th>
-		      <td>{{tarea.materia}}</td>
-		      <td>{{tarea.fecha_limite}}</td>
-		      <td>{{tarea.descripcion}}</td>
-	    	</tr>
-		@endeach
-	    
-	  </tbody>
-	</table>
+				@each(tarea in tareasGenerales)
+				@if(tarea.estado == 'cerca')
+					<tr class="table-danger">
+				@else	
+					<tr class="table">
+				@endif
+						<th scope="row">{{tarea.nombre}}</th>
+						<td>{{tarea.materia}}</td>
+						<td>{{tarea.fecha_limite}}</td>
+						<td>{{tarea.descripcion}}</td>
+						@loggedIn
+							@if(auth.user.rol==3)
+								<td>
+									<a href="/detalles_tarea/{{tarea.id}}" class="btn btn-outline-secondary">DETALLES</a>
+								</td>
+							@endif
+						@endloggedIn
+					</tr>
+			@endeach
+				
+			</tbody>
+		</table>
+	
 @endsection
+

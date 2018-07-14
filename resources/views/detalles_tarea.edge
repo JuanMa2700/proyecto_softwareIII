@@ -1,0 +1,25 @@
+@layout('prueba_layout')
+
+@section('content')
+
+<div class="jumbotron">
+  <h1 class="display-4">DETALLES DE LA TAREA</h1>
+  <hr class="my-4">
+
+  <p><strong>NOMBRE:</strong> {{tarea.nombre}}</p>
+  <p><strong>TEMA:</strong> {{tarea.tema}}</p>
+  <p><strong>FECHA DE ENTREGA:</strong> {{tarea.fecha}}</p>
+  @if(tarea.logros != '')
+    <p><strong>LOGROS:</strong></p>
+    <P>{{tarea.logros}}</P>
+  @endif
+<p><strong>DESCRIPCIÓN:</strong></p>
+<P>{{tarea.descripcion}}</P>
+@if(tarea.archivo!=null)
+    <p><strong>ARCHIVO:</strong></p>
+    <P>{{tarea.archivo}}</P>
+  @endif
+  <a class="btn btn-primary btn-lg" href="/consultar/tareas/{{auth.user.codigo}}" role="button">Regresar</a>
+</div>
+
+@endsection

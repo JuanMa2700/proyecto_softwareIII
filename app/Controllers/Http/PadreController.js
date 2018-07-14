@@ -19,7 +19,7 @@ class PadreController {
         console.log(user)
         await user.save()
         await padre.save()
-        response.redirect('inicio_sesion')
+        response.redirect('login')
     }
 }
 

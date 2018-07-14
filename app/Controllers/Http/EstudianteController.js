@@ -20,7 +20,7 @@ class EstudianteController {
         console.log(user)
         await user.save()
         await estudiante.save()
-        response.redirect('inicio_sesion')
+        response.redirect('login')
     }
 }
 

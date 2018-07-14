@@ -102,6 +102,31 @@ Route.get('consultar/tareas/:documento', async({view, params}) => {
       return  new Date(a.fecha_limite)-new Date(b.fecha_limite);
     });
 
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    tareasGenerales.forEach(function(tarea){
+
+      var t = new Date(tarea.fecha_limite);
+
+      if(t.getFullYear() < yyyy){
+        tarea.estado = 'tarde'
+      }else if((t.getMonth()+1 < mm) && (t.getFullYear() == yyyy)){
+        tarea.estado = 'tarde'
+      }else if((t.getDate() < dd) && (t.getMonth()+1 == mm) && (t.getFullYear() == yyyy)){
+        tarea.estado = 'tarde'
+      }else if((t.getDate()-2 < dd) && (t.getMonth()+1 == mm) && (t.getFullYear() == yyyy)){
+        tarea.estado = 'cerca'
+      }else{
+        tarea.estado = 'lejos'
+      }
+      //console.log(tarea.estado)
+    })
+
+    //console.log("---------------------------------------------------")
+
     return view.render('consultartareasestudiante', { tareasGenerales })
 
 })
@@ -119,6 +144,18 @@ Route.get('consultar/seleccionarHijo/:cedula', async({view, params}) => {
       .where('cedula_padre', padre.cedula)
 
     return view.render('seleccionarHijo', { hijos })
+
+})
+
+Route.get('detalles_tarea/:id', async({view, params}) => {
+
+  const Tarea = use('App/Models/Tarea')
+  const Tema = use('App/Models/Tema')
+  const tarea = await Tarea.findBy('id', params.id)
+  tarea.tema = await Tema.findBy('codigo', tarea.codigo_tema)
+  tarea.tema = tarea.tema.descripcion
+  tarea.fecha = new Date (tarea.fecha_limite).toLocaleDateString();
+  return view.render('detalles_tarea', {tarea})
 
 })
 
