@@ -147,6 +147,12 @@ Route.get('consultar/seleccionarHijo/:cedula', async({view, params}) => {
 
 })
 
+Route.get('descarcargar_tarea/:id', async({ params,response}) => {
+  //response.download(Helpers.tmpPath('uploads/custom-name.jpg'))
+  response.attachment(
+    Helpers.tmpPath('uploads/'+params.id)
+  )
+})
 Route.get('detalles_tarea/:id', async({view, params}) => {
 
   const Tarea = use('App/Models/Tarea')
@@ -159,3 +165,28 @@ Route.get('detalles_tarea/:id', async({view, params}) => {
 
 })
 
+
+Route.get('prueba', async({view}) => {
+
+
+  return view.render('prueba')
+
+})
+
+const Helpers = use('Helpers')
+
+Route.post('upload', async ({ request }) => {
+  const profilePic = request.file('profile_pic', {
+    types: ['image'],
+    size: '2mb'
+  })
+
+  await profilePic.move(Helpers.tmpPath('uploads'), {
+    name: 'custom-name.jpg'
+  })
+
+  if (!profilePic.moved()) {
+    return profilePic.error()
+  }
+  return 'File moved'
+})
